@@ -151,13 +151,16 @@ app.MapGet("/", async context =>
         "<h4>You can access to the <a href='" + urlSwagger + "'>" + urlSwagger + "</a> and see all the APIs</h4>");
 });
 
-app.UseHttpsRedirection();
-
-app.UseCors(Strings.AllowOrigins.PolicyWithOrigins);
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors(Strings.AllowOrigins.PolicyWithOrigins);
 
 app.UseAuthentication();
 
