@@ -1,0 +1,6 @@
+@SnapLife_HostAddress = http://localhost:5080
+
+GET {{SnapLife_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
