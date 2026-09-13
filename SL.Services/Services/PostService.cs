@@ -434,7 +434,17 @@ namespace SL.Services.Services
                 }
             }
 
-            return PostMappings.EntityToDetailVModel(post, currentUserId, userReaction);
+            var topReactions = await _context.Reactions
+                .Where(r => r.TargetType == ReactionTargetType.Post
+                         && r.TargetId == post.Id
+                         && r.IsActive == true)
+                .GroupBy(r => r.Type)
+                .OrderByDescending(g => g.Count())
+                .Select(g => g.Key)
+                .Take(3)
+                .ToListAsync();
+
+            return PostMappings.EntityToDetailVModel(post, currentUserId, userReaction, topReactions);
         }
 
         private static Expression<Func<Post, bool>> BuildQueryable(PostFilterVModel fParams)

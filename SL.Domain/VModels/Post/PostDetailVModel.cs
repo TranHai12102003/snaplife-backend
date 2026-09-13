@@ -43,6 +43,9 @@ namespace SL.Domain.VModels.Post
         // Trạng thái đối với người dùng đang đăng nhập
         public bool IsOwner { get; set; }
         public ReactionType? UserReaction { get; set; }
+
+        // Top biểu cảm được thả nhiều nhất
+        public List<ReactionType> TopReactions { get; set; } = new();
     }
 }
 

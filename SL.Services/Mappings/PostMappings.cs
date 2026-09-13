@@ -47,7 +47,8 @@ namespace SL.Services.Mappings
         public static PostDetailVModel EntityToDetailVModel(
             Post post,
             string? currentUserId,
-            ReactionType? userReaction = null)
+            ReactionType? userReaction = null,
+            List<ReactionType>? topReactions = null)
         {
             var author = post.User;
             bool isSelf = !string.IsNullOrEmpty(currentUserId) && currentUserId == post.UserId;
@@ -101,7 +102,8 @@ namespace SL.Services.Mappings
                 CommentCount = post.CommentCount,
                 ShareCount = post.ShareCount,
                 IsOwner = isSelf,
-                UserReaction = userReaction
+                UserReaction = userReaction,
+                TopReactions = topReactions ?? new List<ReactionType>()
             };
         }
     }
